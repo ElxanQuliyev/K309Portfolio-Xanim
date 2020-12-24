@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="K307PortfolioDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AboutSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="400" />
+          <Property Name="header" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="deccription" Type="nvarchar" MaxLength="300" />
+          <Property Name="publishDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortfolioSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="400" />
+          <Property Name="header" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="deccription" Type="nvarchar" MaxLength="300" />
+          <Property Name="publishDate" Type="datetime" Nullable="false" />
+          <Property Name="categoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="Section1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="400" />
+          <Property Name="subHeader" Type="nvarchar" MaxLength="150" />
+          <Property Name="header" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="sectionTeam">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="400" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="workArea" Type="nvarchar" MaxLength="50" />
+          <Property Name="fbLink" Type="varchar" MaxLength="400" />
+          <Property Name="instaLink" Type="varchar" MaxLength="400" />
+          <Property Name="twitterLink" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="ServiceSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="icon" Type="varchar" MaxLength="400" />
+          <Property Name="header" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="deccription" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <Association Name="FK__Portfolio__categ__3D5E1FD2">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="PortfolioSection" Type="Self.PortfolioSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="PortfolioSection">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="K307PortfolioDBModelStoreContainer">
+          <EntitySet Name="AboutSection" EntityType="Self.AboutSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortfolioSection" EntityType="Self.PortfolioSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section1" EntityType="Self.Section1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sectionTeam" EntityType="Self.sectionTeam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceSection" EntityType="Self.ServiceSection" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Portfolio__categ__3D5E1FD2" Association="Self.FK__Portfolio__categ__3D5E1FD2">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="PortfolioSection" EntitySet="PortfolioSection" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="K307PortfolioDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AboutSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deccription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="publishDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="cId" />
+          </Key>
+          <Property Name="cId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PortfolioSections" Relationship="Self.FK__Portfolio__categ__3D5E1FD2" FromRole="Categories" ToRole="PortfolioSection" />
+        </EntityType>
+        <EntityType Name="PortfolioSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deccription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="publishDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="categoryId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Portfolio__categ__3D5E1FD2" FromRole="PortfolioSection" ToRole="Categories" />
+        </EntityType>
+        <EntityType Name="Section1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="subHeader" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sectionTeam">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="workArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fbLink" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="instaLink" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="twitterLink" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ServiceSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="icon" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="header" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="deccription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Portfolio__categ__3D5E1FD2">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="PortfolioSection" Type="Self.PortfolioSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="cId" />
+            </Principal>
+            <Dependent Role="PortfolioSection">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PortfolioDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AboutSections" EntityType="Self.AboutSection" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="PortfolioSections" EntityType="Self.PortfolioSection" />
+          <EntitySet Name="Section1" EntityType="Self.Section1" />
+          <EntitySet Name="sectionTeams" EntityType="Self.sectionTeam" />
+          <EntitySet Name="ServiceSections" EntityType="Self.ServiceSection" />
+          <AssociationSet Name="FK__Portfolio__categ__3D5E1FD2" Association="Self.FK__Portfolio__categ__3D5E1FD2">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="PortfolioSection" EntitySet="PortfolioSections" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="K307PortfolioDBModelStoreContainer" CdmEntityContainer="PortfolioDB">
+          <EntitySetMapping Name="AboutSections">
+            <EntityTypeMapping TypeName="K307PortfolioDBModel.AboutSection">
+              <MappingFragment StoreEntitySet="AboutSection">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="header" ColumnName="header" />
+                <ScalarProperty Name="deccription" ColumnName="deccription" />
+                <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="K307PortfolioDBModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="cId" ColumnName="cId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortfolioSections">
+            <EntityTypeMapping TypeName="K307PortfolioDBModel.PortfolioSection">
+              <MappingFragment StoreEntitySet="PortfolioSection">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="header" ColumnName="header" />
+                <ScalarProperty Name="deccription" ColumnName="deccription" />
+                <ScalarProperty Name="publishDate" ColumnName="publishDate" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Section1">
+            <EntityTypeMapping TypeName="K307PortfolioDBModel.Section1">
+              <MappingFragment StoreEntitySet="Section1">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="subHeader" ColumnName="subHeader" />
+                <ScalarProperty Name="header" ColumnName="header" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sectionTeams">
+            <EntityTypeMapping TypeName="K307PortfolioDBModel.sectionTeam">
+              <MappingFragment StoreEntitySet="sectionTeam">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="workArea" ColumnName="workArea" />
+                <ScalarProperty Name="fbLink" ColumnName="fbLink" />
+                <ScalarProperty Name="instaLink" ColumnName="instaLink" />
+                <ScalarProperty Name="twitterLink" ColumnName="twitterLink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceSections">
+            <EntityTypeMapping TypeName="K307PortfolioDBModel.ServiceSection">
+              <MappingFragment StoreEntitySet="ServiceSection">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="header" ColumnName="header" />
+                <ScalarProperty Name="deccription" ColumnName="deccription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
