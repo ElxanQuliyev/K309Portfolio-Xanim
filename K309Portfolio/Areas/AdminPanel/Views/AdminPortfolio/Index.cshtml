@@ -1,0 +1,83 @@
+﻿@model List<K309Portfolio.Models.PortfolioSection>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Portfolio</h2>
+<p>
+    <a href="@Url.Action("Create")">Create</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Header</th>
+            <th>img</th>
+            <th>Publish Date</th>
+            <th>Category</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var port in Model)
+        {
+            <tr>
+                <td>@port.header</td>
+                <td>
+                    <img src="@port.imageUrl" alt="Alternate Text" />
+                </td>
+                <td class="text-success"> @port.publishDate <i class="mdi mdi-arrow-up"></i></td>
+                <td><label class="badge badge-warning">@port.Category.Name</label></td>
+                <td>
+                    <a href="@Url.Action("Edit",new { id=port.id})"><i class="icon-note"></i> Edit</a> |
+                    <a href="@Url.Action("Details",new {id=port.id})"><i class="icon-info"></i> Detail</a> |
+                    <a class="btnDelete" xanim="@port.id" href="#"><i class="icon-trash"></i> Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section adminScripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+
+        $(".btnDelete").click(function () {
+            let proId = $(this).attr("xanim")
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "@Url.Action("Delete")",
+                        data: {
+                            portId: proId
+                        },
+                        success: function () {
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                            setTimeout(() => {
+                                window.location.reload(true)
+                            },1000)
+                        }
+                    })
+                    
+                }
+            })
+
+        })
+
+    </script>
+}

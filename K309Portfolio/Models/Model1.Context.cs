@@ -31,5 +31,6 @@ namespace K309Portfolio.Models
         public virtual DbSet<Section1> Section1 { get; set; }
         public virtual DbSet<sectionTeam> sectionTeams { get; set; }
         public virtual DbSet<ServiceSection> ServiceSections { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
     }
 }

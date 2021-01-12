@@ -12,7 +12,7 @@ namespace K309Portfolio.Controllers
         PortfolioDB db = new PortfolioDB();
         public ActionResult Index()
         {
-            ViewBag.section1 = db.Section1.Where(x => x.subHeader == "22").ToList();
+            ViewBag.section1 = db.Section1.First();
             ViewBag.service = db.ServiceSections.OrderByDescending(x=>x.id).Take(3).ToList();
             ViewBag.portfolio = db.PortfolioSections.OrderBy(x=>x.id).ToList();
             ViewBag.about = db.AboutSections.OrderBy(x => x.id).ToList();
@@ -26,7 +26,12 @@ namespace K309Portfolio.Controllers
 
             return View();
         }
-
+        public ActionResult GetPortfolio(int? portId)
+        {
+            PortfolioSection selectedPort = db.PortfolioSections.Find(portId);
+            ViewBag.portfolio = selectedPort;
+            return PartialView("_PortfolioInfo");
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
